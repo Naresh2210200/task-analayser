@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Task Analyzer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Smart Task Analyzer</h1>
+      <p>Score and prioritize your tasks intelligently.</p>
+    </header>
+
+    <main class="app-main">
+      <section class="panel input-panel">
+        <h2>Input Tasks</h2>
+
+        <form id="task-form" class="task-form">
+          <div class="form-row">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required placeholder="Fix login bug">
+          </div>
+
+          <div class="form-row two-col">
+            <div>
+              <label for="due_date">Due Date</label>
+              <input type="date" id="due_date" name="due_date" required>
+            </div>
+            <div>
+              <label for="estimated_hours">Estimated Hours</label>
+              <input type="number" id="estimated_hours" name="estimated_hours" min="0" step="0.25" required>
+            </div>
+          </div>
+
+          <div class="form-row two-col">
+            <div>
+              <label for="importance">Importance (1-10)</label>
+              <input type="number" id="importance" name="importance" min="1" max="10" required>
+            </div>
+            <div>
+              <label for="dependencies">Dependencies (IDs, comma-separated)</label>
+              <input type="text" id="dependencies" name="dependencies" placeholder="e.g. 1,2">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn">Add Task</button>
+            <button type="button" id="clear-tasks" class="btn btn-secondary">Clear Tasks</button>
+          </div>
+        </form>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <div class="bulk-input">
+          <label for="bulk-json">Bulk JSON Input</label>
+          <textarea id="bulk-json" placeholder='[{"title": "Fix bug", "due_date": "2025-11-30", "estimated_hours": 3, "importance": 8, "dependencies": []}]'></textarea>
+          <button type="button" id="load-bulk" class="btn btn-secondary">Load JSON Tasks</button>
+        </div>
+
+        <div class="strategy-row">
+          <label for="strategy">Sorting Strategy</label>
+          <select id="strategy">
+            <option value="smart_balance">Smart Balance (recommended)</option>
+            <option value="fastest_wins">Fastest Wins (low effort first)</option>
+            <option value="high_impact">High Impact (importance first)</option>
+            <option value="deadline_driven">Deadline Driven (due date first)</option>
+          </select>
+        </div>
+
+        <div class="actions-row">
+          <button type="button" id="analyze-btn" class="btn btn-primary">Analyze Tasks</button>
+          <button type="button" id="suggest-btn" class="btn btn-outline">Suggest Today&apos;s Top 3</button>
+        </div>
+
+        <div id="status" class="status"></div>
+      </section>
+
+      <section class="panel output-panel">
+        <h2>Analysis Results</h2>
+        <div id="task-list" class="task-list empty-state">
+          <p>No tasks analyzed yet. Add some tasks and click <strong>Analyze Tasks</strong>.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <small>Smart Task Analyzer &mdash; Demo assignment implementation.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
